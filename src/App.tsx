@@ -3,6 +3,7 @@ import JsonComparison from './JsonComparison';
 
 const App: React.FC = () => {
   const [jsons, setJsons] = useState<Record<string, any>[]>([]);
+  const [jsonString, setJsonString] = useState<string>('');
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -25,10 +26,39 @@ const App: React.FC = () => {
     }
   };
 
+  const handleJsonStringChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setJsonString(event.target.value);
+  };
+
+  const handleAddJsonString = () => {
+    try {
+      const json = JSON.parse(jsonString);
+      if (Array.isArray(json)) {
+        setJsons((prevJsons) => [...prevJsons, ...json]);
+      } else {
+        setJsons((prevJsons) => [...prevJsons, json]);
+      }
+      setJsonString('');
+    } catch (err) {
+      console.error('Invalid JSON string:', err);
+      alert('The entered string is not a valid JSON.');
+    }
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>JSON Comparison</h1>
       <input type="file" accept="application/JSON" onChange={handleFileUpload} style={{ float: 'right' }} />
+      <div>
+        <textarea
+          value={jsonString}
+          onChange={handleJsonStringChange}
+          placeholder="Enter JSON string here"
+          rows={10}
+          cols={50}
+        />
+        <button onClick={handleAddJsonString}>Add JSON</button>
+      </div>
       {jsons.length > 0 && <JsonComparison jsons={jsons} />}
     </div>
   );
