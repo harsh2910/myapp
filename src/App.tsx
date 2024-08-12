@@ -24,8 +24,8 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1>JSON Comparison</h1>
-      <input type="file" accept="application/JSON" onChange={handleFileUpload} />
+      <h1 style={{ textAlign: 'center' }}>JSON Comparison</h1>
+      <input type="file" accept="application/JSON" onChange={handleFileUpload} style={{ float: 'right' }} />
       {jsons.length > 0 && <JsonComparison jsons={jsons} />}
     </div>
   );
