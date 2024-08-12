@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useState } from 'react';
+import JsonComparison from './JsonComparison';
+
+const App: React.FC = () => {
+  const [jsons, setJsons] = useState<Record<string, any>[]>([]);
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const json = JSON.parse(e.target?.result as string);
+          setJsons((prevJsons) => [...prevJsons, json]);
+        } catch (err) {
+          console.error('Invalid JSON file:', err);
+          alert('The uploaded file is not a valid JSON.');
+        }
+      };
+      reader.readAsText(file);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>JSON Comparison</h1>
+      <input type="file" accept="application/JSON" onChange={handleFileUpload} />
+      {jsons.length > 0 && <JsonComparison jsons={jsons} />}
     </div>
   );
-}
+};
 
 export default App;
