@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface JsonComparisonProps {
   jsons: Record<string, any>[]; // Array of JSON objects
@@ -7,20 +7,27 @@ interface JsonComparisonProps {
 const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
   if (jsons.length === 0) return null;
 
-  const baseColor = '#DFF0D8'; // Light green for JSON A
-  const compareColor = '#D9EDF7'; // Light blue for other JSONs
-  const baseTextColor = '#3C763D'; // Dark green text for JSON A
-  const compareTextColor = '#31708F'; // Dark blue text for other JSONs
+  const baseColor = "#DFF0D8"; // Light green for JSON A
+  const compareColor = "#D9EDF7"; // Light blue for other JSONs
+  const baseTextColor = "#3C763D"; // Dark green text for JSON A
+  const compareTextColor = "#31708F"; // Dark blue text for other JSONs
 
-  const renderJsonWithHighlights = (json: Record<string, any>, isBase: boolean) => {
+  const renderJsonWithHighlights = (
+    json: Record<string, any>,
+    isBase: boolean
+  ) => {
     return (
       <pre>
         {Object.entries(json).map(([key, value]) => {
           let style = {
-            backgroundColor: 'transparent',
-            color: 'inherit',
-            padding: '5px',
-            margin: '2px 0',
+            backgroundColor: "transparent",
+            color: "inherit",
+            padding: "5px",
+            margin: "2px 0",
+            width: "800px",
+            overflow: "hidden",
+            whiteSpace: "pre-wrap",
+            overflowWrap: "break-word",
           };
 
           if (isBase) {
@@ -38,7 +45,7 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
           }
 
           return (
-            <div key={key} style={style}>
+            <div key={key} style={style as any}>
               <strong>{key}</strong>: {JSON.stringify(value, null, 2)}
             </div>
           );
@@ -48,9 +55,16 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around', width:'100%',overflowX: 'scroll' }}>
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        justifyContent: "space-around",
+        overflowX: "scroll",
+      }}
+    >
       {jsons.map((json, index) => (
-        <div key={index} style={{ width: '45%',minWidth: '200px', margin: '10px' }}>
+        <div key={index} style={{ margin: "10px" }}>
           <h3>JSON {index + 1}</h3>
           {renderJsonWithHighlights(json, index === 0)}
         </div>
