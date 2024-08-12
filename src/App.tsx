@@ -59,11 +59,12 @@ const App: React.FC = () => {
           value={jsonString}
           onChange={handleJsonStringChange}
           placeholder="Enter JSON string here"
-          rows={10}
+          rows={2}
           cols={50}
+          style={{ marginLeft: '20px' }}
         />
         <button onClick={handleAddJsonString}>Add JSON</button>
-        <button onClick={handleNewComparison}>New Comparison</button>
+        <button style={{ margin: '20px' }}onClick={handleNewComparison}>New Comparison</button>
       </div>
       {jsons.length > 0 && <JsonComparison jsons={jsons} />}
     </div>
