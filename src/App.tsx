@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import JsonComparison from './JsonComparison';
 
@@ -12,7 +11,11 @@ const App: React.FC = () => {
       reader.onload = (e) => {
         try {
           const json = JSON.parse(e.target?.result as string);
-          setJsons((prevJsons) => [...prevJsons, json]);
+          if (Array.isArray(json)) {
+            setJsons((prevJsons) => [...prevJsons, ...json]);
+          } else {
+            setJsons((prevJsons) => [...prevJsons, json]);
+          }
         } catch (err) {
           console.error('Invalid JSON file:', err);
           alert('The uploaded file is not a valid JSON.');
