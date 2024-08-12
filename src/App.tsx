@@ -45,6 +45,11 @@ const App: React.FC = () => {
     }
   };
 
+  const handleNewComparison = () => {
+    setJsons([]);
+    setJsonString('');
+  };
+
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>JSON Comparison</h1>
@@ -58,6 +63,7 @@ const App: React.FC = () => {
           cols={50}
         />
         <button onClick={handleAddJsonString}>Add JSON</button>
+        <button onClick={handleNewComparison}>New Comparison</button>
       </div>
       {jsons.length > 0 && <JsonComparison jsons={jsons} />}
     </div>
