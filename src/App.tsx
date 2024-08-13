@@ -64,7 +64,7 @@ const App: React.FC = () => {
           style={{ marginLeft: '20px' }}
         />
         <button onClick={handleAddJsonString}>Add JSON</button>
-        <button style={{ margin: '20px' }}onClick={handleNewComparison}>New Comparison</button>
+        <button style={{ marginLeft: '100px' }}onClick={handleNewComparison}>New Comparison</button>
       </div>
       {jsons.length > 0 && <JsonComparison jsons={jsons} />}
     </div>
