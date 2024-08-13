@@ -1,7 +1,8 @@
 import React from "react";
+import { Paper, Typography } from '@mui/material';
 
 interface JsonComparisonProps {
-  jsons: Record<string, any>[]; // Array of JSON objects
+  jsons: Record<string, any>[];
 }
 
 const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
@@ -24,8 +25,8 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
             color: "inherit",
             padding: "5px",
             margin: "2px 0",
-            width: "800px",
-            overflowX: "scroll",
+            width: "400px",
+            overflowX: "auto",
             scrollbarWidth: "thin",
           };
 
@@ -63,10 +64,10 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
       }}
     >
       {jsons.map((json, index) => (
-        <div key={index} style={{ margin: "10px" }}>
-          <h3>JSON {index + 1}</h3>
+        <Paper key={index} style={{ margin: "10px", padding: "10px" }}>
+          <Typography variant="h6">JSON {index + 1}</Typography>
           {renderJsonWithHighlights(json, index === 0)}
-        </div>
+        </Paper>
       ))}
     </div>
   );
