@@ -77,7 +77,6 @@ const App: React.FC = () => {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>JSON Comparison</h1>
       <div className="button-container">
         
         <Button variant="contained" color="secondary" onClick={handleNewComparison} >
