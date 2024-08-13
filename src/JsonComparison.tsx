@@ -25,9 +25,8 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
             padding: "5px",
             margin: "2px 0",
             width: "800px",
-            overflow: "hidden",
-            whiteSpace: "pre-wrap",
-            overflowWrap: "break-word",
+            overflowX: "scroll",
+            scrollbarWidth: "thin",
           };
 
           if (isBase) {
