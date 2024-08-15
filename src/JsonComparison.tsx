@@ -1,5 +1,7 @@
 import React from "react";
-import { Paper, Typography } from '@mui/material';
+import { Typography } from '@mui/material';
+import { ResizableBox } from 'react-resizable';
+import 'react-resizable/css/styles.css';
 
 interface JsonComparisonProps {
   jsons: Record<string, any>[];
@@ -25,7 +27,7 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
             color: "inherit",
             padding: "5px",
             margin: "2px 0",
-            width: "400px",
+            width: "100%",
             overflowX: "auto",
             scrollbarWidth: "thin",
           };
@@ -64,10 +66,10 @@ const JsonComparison: React.FC<JsonComparisonProps> = ({ jsons }) => {
       }}
     >
       {jsons.map((json, index) => (
-        <Paper key={index} style={{ margin: "10px", padding: "10px" }}>
+        <ResizableBox style={{ margin: "10px", padding: "10px" }} width={500} axis="x" minConstraints={[400,0]}>
           <Typography variant="h6">JSON {index + 1}</Typography>
           {renderJsonWithHighlights(json, index === 0)}
-        </Paper>
+        </ResizableBox>
       ))}
     </div>
   );
